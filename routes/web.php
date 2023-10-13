@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,27 +17,51 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //resouces/views/welcome.blade.php ビューが表示
     return view('welcome');
 });
 
-// aboutページの追加 23-10-06 3.week3
-Route::get('/about', function () {
-    return "About Page!!";
-});
+// aboutページの追加 23-10-06 3.week3 23-10-13 3.week4
+// Route::get('/about', function () {
+//     // return "About Page!!";
+//     return view('about'); // about.blade.php を表示
+// });
 
-// Amazonの商品のようなルーティング 23-10-06 3.week3
+// ルーティング後は、コントローラーに任せる
+Route::get('/about', [HomeController::class, 'about']);
+Route::get('/search', [HomeController::class, 'search']);
+
 Route::get('/item/{id}', function ($id) {
     $message = "商品IDは{$id}";
     return $message;
 });
 
-// GooGle検索のようなルーティング 23-10-06 3.week3
-Route::get('/search', function (Request $request) { // Request: [Illuminate\Http]
-    // dd($request); // dd: デバッグ
-    $keyword = $request->q; // q ← クエリパラメータ
-    $message = "キーワードは{$keyword}です";
+// Amazonの商品のようなルーティング 
+Route::get('/dp/{id}', function ($id) {
+    $message = "商品IDは{$id}";
     return $message;
 });
+
+// URLから直接アクセスできない
+Route::post('/hello', function () {
+    $message = "こんにちは";
+    return $message;
+});
+
+// GooGle検索のようなルーティング 23-10-06 3.week3
+// Route::get('/search', function (Request $request) { // Request: [Illuminate\Http]
+//     // dd($request); // dd: デバッグ
+//     // $keyword = $request->q; // q ← クエリパラメータ
+//     // $message = "キーワードは{$keyword}です";
+//     // return $message;
+
+//     // 連想配列データ
+//     $data = [
+//         'keyword' => $request ->q
+//     ];
+//     // viewファイルにデータを渡す
+//     return view('search', $data);
+// });
 // $request->q : java, pythonだと request.q という表記ができるが phpでは出来ない
 // ※ php だと ドット(.)は +(文字列結合)と同じに意味になる 
 
