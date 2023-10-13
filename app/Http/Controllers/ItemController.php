@@ -36,7 +36,8 @@ class ItemController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $message = "商品IDは{$id}";
+        return $message;
     }
 
     /**
