@@ -1,1 +1,1 @@
-TTerminal:  php artisan serve
+Terminal:  php artisan serve
