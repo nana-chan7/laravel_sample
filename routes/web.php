@@ -6,26 +6,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    // resources/views/welcome.blade.php ビューが表示
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     // resources/views/welcome.blade.php ビューが表示
+//     return view('welcome');
+// });
 
 // ルーティング後は、コントローラーに任せる
 // HomeController
-Route::get('/about', [HomeController::class, 'about']);
-Route::get('/search', [HomeController::class, 'search']);
+Route::get('/about', [HomeController::class, 'about']) =>name('about');
+Route::get('/search', [HomeController::class, 'search']) =>name('search');
 
 // ItemController
 Route::get('/item/{id}', [ItemController::class, 'show']);
