@@ -108,8 +108,11 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        // DELETE FROM items WHERE id = xx;
+        Item::destroy($id);
+        // 一覧画面にリダイレクト
+        return redirect(route('item.index'));
     }
 }

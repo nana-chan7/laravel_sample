@@ -18,6 +18,11 @@
                         <button>更新</button>
                     </form>
                     <a href="{{ route('item.index') }}">戻る</a>
+
+                    <form action="{{ route('item.destroy', $item->id ) }}" method="post">
+                        @csrf   
+                        <button>削除</button>
+                    </form>
                 </div>
             </div>
         </div>
