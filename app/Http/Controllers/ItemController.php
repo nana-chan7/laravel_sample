@@ -2,62 +2,96 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Item;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
-class ProfileController extends Controller
+class ItemController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display a listing of the resource.
      */
-    public function edit(Request $request): View
+    public function index()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        // TODO: データをすべて取得
+        // SELECT * FROM items;
+        $items = Item::get();
+        $data['items'] = $items;
+
+        // views/item/index.blade.php
+        return view('item.index', $data);
     }
 
     /**
-     * Update the user's profile information.
+     * Show the form for creating a new resource.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function create()
     {
-        // フォームから送信されたデータを取得
-        $request->user()->fill($request->validated());
+        // views/item/create.blade.php
+        return view('item.create');
+    }
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // dd($request);
+        // dd($request->all());
+        //Requestからデータを取得
+        $data = $request->all();
+        //データベースに保存
+        // INSERT INTO items (name, price) VALUES (xxxx, xxxx);
+        Item::create($data);
+        //リダイレクト
+        return redirect(route('item.index'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(int $id)
+    {
+        // $items[1] = "コーヒー";
+        // $items[2] = "紅茶";
+        // $items[3] = "ほうじ茶";
+        $items = [
+            1 => 'コーヒー',
+            2 => '紅茶',
+            3 => 'ほうじ茶',
+        ];
+        $item = "";
+        if ($id > 0 && in_array($id, array_keys($items))) {
+            $item = $items[$id];
         }
+        // ビューに受け渡すデータ生成
+        $data = ['item' => $item];
 
-        // 「users」テーブルのユーザ情報を UPDATE
-        // UPDATE users SET name = "xxxx" WHERE users.id = xx
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // reources/views/item/show.blade.php を表示
+        // データを受け渡す
+        return view('item.show', $data);
     }
 
     /**
-     * Delete the user's account.
+     * Show the form for editing the specified resource.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function edit(string $id)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+        //
+    }
 
-        $user = $request->user();
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
