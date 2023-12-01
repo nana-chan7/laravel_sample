@@ -1,24 +1,28 @@
 <?php
-// namespace（名前空間）：packageみたいなもの
+
+// Javaでいう package
 namespace App\Http\Controllers;
 
-// プログラムの読み込み：importみたいなもの
+// Javaでいう import
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function about()
-    {
+    public function about() {
+        // resouces/views/about.blade.php が表示
         return view('about');
     }
 
-    function search(Request $request)
-    {
-        //連想配列データ
+    public function search(Request $request) {
         $data = [
             'keyword' => $request->q
         ];
-        // Viewファイルにデータを渡す
+        //TODO: 検索処理して結果を Viewに渡す
+        // resouces/views/search.blade.php が表示
         return view('search', $data);
+    }
+
+    public function update(Request $request, $id) {
+        return $id;
     }
 }

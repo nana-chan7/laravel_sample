@@ -13,4 +13,10 @@ class Item extends Model
         'name',
         'price',
     ];
+
+    protected $garded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 }
