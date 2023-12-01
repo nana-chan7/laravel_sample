@@ -35,7 +35,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request); // デバッグ
         // dd($request->all());
         //Requestからデータを取得
         $data = $request->all();
@@ -80,7 +80,6 @@ class ItemController extends Controller
         // 商品IDから商品データを取得
         // SELECT * FROM items WHERE id = xx;
         $item = Item::find($id);
-        // dd($item); // デバッグ
         $data['item'] = $item;
         // 編集画面を表示
         return view('item.edit', $data);
@@ -91,7 +90,6 @@ class ItemController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        //
         $data = $request->all();
         // dd($data);
         // UPDATE items SET price = xxx WHERE id = xx;
