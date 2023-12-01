@@ -95,7 +95,6 @@ class ItemController extends Controller
         $data = $request->all();
         // dd($data);
         // UPDATE items SET price = xxx WHERE id = xx;
-
         // 1.
         // unset($data['_token']);
         // Item::where('id', $id)->update($data);
