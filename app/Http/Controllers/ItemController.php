@@ -89,9 +89,23 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         //
+        $data = $request->all();
+        // dd($data);
+        // UPDATE items SET price = xxx WHERE id = xx;
+
+        // 1.
+        // unset($data['_token']);
+        // Item::where('id', $id)->update($data);
+        // 2.
+        // SELECT * FROM items WHERE id = xx;
+        // UPDATE items SET price = xxx WHERE id = xx;
+        Item::find($id)->fill($data)->save();
+
+        // リダイレクト
+        return redirect(route('item.edit', $id));
     }
 
     /**
