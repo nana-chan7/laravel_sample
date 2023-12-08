@@ -16,11 +16,11 @@ return [
 
     'timezone' => 'UTC',
 
-    // 'locale' => 'en',
-    'locale' => 'ja',
-
-    // 'fallback_locale' => 'en',
-    'fallback_locale' => 'ja',
+    // 言語: 英語化 | 日本語化
+    'locale' => 'en',
+    // 'locale' => 'ja',
+    'fallback_locale' => 'en',
+    // 'fallback_locale' => 'ja',
 
     'faker_locale' => 'en_US',
 

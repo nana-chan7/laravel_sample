@@ -3,8 +3,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2>商品一覧</h2>
-                    <a href="{{ route('item.create') }}">新規追加</a>
+                    <h2>{{ __('messages.item_list') }}</h2>
+                    <a href="{{ route('item.create') }}">{{ __('messages.new_add') }}</a>
                     <table class="tabel">
                         <tr>
                             <th></th>
@@ -24,3 +24,4 @@
         </div>
     </div>
 </x-app-layout>
+
