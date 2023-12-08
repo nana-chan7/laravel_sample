@@ -16,7 +16,7 @@ class ItemRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'], // 文字列
-            'price' => ['required', 'inteder', 'min:0', 'max:10000'], // 整数 最小値:0 最大値:10万
+            'price' => ['required', 'integer', 'min:0', 'max:100000'], // 整数 最小値:0 最大値:10万
         ];
     }
 }
