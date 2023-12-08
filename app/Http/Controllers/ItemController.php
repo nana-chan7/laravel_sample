@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
+
 class ItemController extends Controller
 {
     /**
@@ -94,12 +95,14 @@ class ItemController extends Controller
         // dd($data);
         // UPDATE items SET price = xxx WHERE id = xx;
         // 1.
-        // unset($data['_token']);
-        // Item::where('id', $id)->update($data);
+        unset($data['_token']);
+        Item::where('id', $id)->update($data);
+        // Query Builder
+        // DB::table('items')->where('id', $id)->update($data); // ->: メソッドチェーン
         // 2.
         // SELECT * FROM items WHERE id = xx;
         // UPDATE items SET price = xxx WHERE id = xx;
-        Item::find($id)->fill($data)->save();
+        // Item::find($id)->fill($data)->save();
 
         // リダイレクト
         return redirect(route('item.edit', $id));
