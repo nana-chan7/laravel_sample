@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class ItemController extends Controller
@@ -34,7 +36,7 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
         // dd($request); // デバッグ
         // dd($request->all());
@@ -42,8 +44,10 @@ class ItemController extends Controller
         $data = $request->all();
         //データベースに保存
         // INSERT INTO items (name, price) VALUES (xxxx, xxxx);
-        // dd($data);
+        // Eloquent
         Item::create($data);
+        // QueryBuilder
+        //DB::table('items')->create($data);
         //リダイレクト
         return redirect(route('item.index'));
     }
@@ -94,15 +98,14 @@ class ItemController extends Controller
         $data = $request->all();
         // dd($data);
         // UPDATE items SET price = xxx WHERE id = xx;
-        // 1.
-        unset($data['_token']);
-        Item::where('id', $id)->update($data);
-        // Query Builder
-        // DB::table('items')->where('id', $id)->update($data); // ->: メソッドチェーン
-        // 2.
+        // 1. Query Builder
+        // unset($data['_token']);
+        // Item::where('id', $id)->update($data);
+        // DB::table('items')->where('id', $id)->update($data);
+        // 2. Eloquent
         // SELECT * FROM items WHERE id = xx;
         // UPDATE items SET price = xxx WHERE id = xx;
-        // Item::find($id)->fill($data)->save();
+        Item::find($id)->fill($data)->save();
 
         // リダイレクト
         return redirect(route('item.edit', $id));
