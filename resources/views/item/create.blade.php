@@ -9,11 +9,11 @@
 
                         <div>
                             <label for="item_name">商品名</label>
-                            <input type="text" name="name">
+                            <input type="text" name="name" value="{{ old('name') }}">
                         </div>
                         <div>
                             <label for="item_price">価格</label>
-                            <input type="text" name="price">
+                            <input type="text" name="price" value="{{ old('price') }}">
                         </div>
                         <button>更新</button>
                     </form>
