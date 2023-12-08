@@ -6,7 +6,7 @@
                 @include('components.error')
 
                 <div class="p-6 text-gray-900">
-                    <h2>商品追加</h2>
+                    <h2>{{ __('messages.item_add') }}</h2>
                     <form action="{{ route('item.store') }}" method="post">
                         @csrf
 

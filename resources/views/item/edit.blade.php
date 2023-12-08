@@ -6,7 +6,7 @@
                 @include('components.error')
 
                 <div class="p-6 text-gray-900">
-                    <h2>商品編集</h2>
+                    <h2>{{ __('messages.item_edit') }}</h2>
                     <form action="{{ route('item.update', $item->id ) }}" method="post">
                         @csrf
 
