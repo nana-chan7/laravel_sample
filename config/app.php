@@ -12,15 +12,15 @@ return [
     'timezone' => 'UTC',
 
     // 言語: 英語化 | 日本語化
-    'locale' => 'en',
-    // 'locale' => 'ja',
-    'fallback_locale' => 'en',
-    // 'fallback_locale' => 'ja',
+    // 'locale' => 'en',
+    'locale' => 'ja',
+    // 'fallback_locale' => 'en',
+    'fallback_locale' => 'ja',
 
     'faker_locale' => 'en_US',
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
-    
+
     'maintenance' => [
         'driver' => 'file',
         // 'store'  => 'redis',
