@@ -5,15 +5,10 @@ use Illuminate\Support\ServiceProvider;
 
 return [
     'name' => env('APP_NAME', 'Laravel'),
-
     'env' => env('APP_ENV', 'production'),
-
     'debug' => (bool) env('APP_DEBUG', false),
-
     'url' => env('APP_URL', 'http://localhost'),
-
     'asset_url' => env('ASSET_URL'),
-
     'timezone' => 'UTC',
 
     // 言語: 英語化 | 日本語化
@@ -23,12 +18,9 @@ return [
     // 'fallback_locale' => 'ja',
 
     'faker_locale' => 'en_US',
-
     'key' => env('APP_KEY'),
-
     'cipher' => 'AES-256-CBC',
-
-
+    
     'maintenance' => [
         'driver' => 'file',
         // 'store'  => 'redis',

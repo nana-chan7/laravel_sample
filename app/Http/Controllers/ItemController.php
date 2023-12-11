@@ -9,14 +9,36 @@ use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     // TODO: データをすべて取得
+    //     // SELECT * FROM items;
+    //     $items = Item::get();
+    //     $data['items'] = $items;
+    //     // views/item/index.blade.php
+    //     return view('item.index', $data);
+    // }
+    public function index(Request $request)
     {
-        // TODO: データをすべて取得
-        // SELECT * FROM items;
-        $items = Item::get();
-        $data['items'] = $items;
+        // Query Parameter から並び変えるカラムを取得
+        $order_column = ($request->order_column) ? $request->order_column : 'id';
+        // Query Parameter から並び変える種類(ASC/DESC)取得
+        $order_value = ($request->order_value) ? $request->order_value : 'asc';
+        if ($item_name = $request->item_name) {
+            //SELECT * FROM items WHERE name LIKE '%xxxx%' ORDER BY XXX ASC/DESC;
+            $items = Item::where('name', 'LIKE', "%{$item_name}%")
+                ->orderBy($order_column, $order_value)
+                ->get();
+        } else {
+            //SELECT * FROM items ORDER BY xxxx ASC / DESC;
+            $items = Item::orderBy($order_column, $order_value)->get();
+        }
 
-        // views/item/index.blade.php
+        $data = [
+            'items' => $items,
+            'item_name' => $item_name,
+        ];
+        // resources/views/item/index.blade.php に受け渡して表示
         return view('item.index', $data);
     }
 
